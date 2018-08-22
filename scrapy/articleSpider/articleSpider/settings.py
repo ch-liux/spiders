@@ -74,7 +74,7 @@ ITEM_PIPELINES = {
    # 'scrapy.pipelines.images.ImagesPipeline': 1,
    'articleSpider.pipelines.ArticleImagePipeline': 100,
    # 'articleSpider.pipelines.MysqlPipeline': 200,
-   # 'articleSpider.pipelines.MysqlTwisterPipeline': 200,
+   'articleSpider.pipelines.MysqlTwisterPipeline': 200,
 }
 IMAGES_URLS_FIELD = "front_image_url"
 project_dir = os.path.abspath(os.path.dirname(__file__))

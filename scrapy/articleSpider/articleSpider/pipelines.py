@@ -11,6 +11,7 @@ import codecs, json, pymysql
 from twisted.enterprise import adbapi
 
 
+
 # 跟数据存储相关
 class ArticlespiderPipeline(object):
     def process_item(self, item, spider):
@@ -31,9 +32,17 @@ class MysqlPipeline(object):
             front_image_path, comment_nums, fav_nums, praise_nums, tags, content)  
              VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
-        params = (item["title"], item["create_date"], item["url"], item["url_object_id"], item["front_image_url"], item["front_image_path"], item["comment_nums"], item["fav_nums"], item["praise_nums"], item["tags"], item["content"])
-        self.cursor.execute(insert_sql, params)
-        self.conn.commit()
+        params = (item["title"], item["create_date"], item["url"], item["url_object_id"], item["front_image_url"][0], item["front_image_path"], item["comment_nums"], item["fav_nums"], item["praise_nums"], item["tags"], item["content"])
+        try:
+            self.cursor.execute(insert_sql, params)
+            self.conn.commit()
+        except Exception:
+            # content可能保存失败ascii
+            params = params[0:(len(params)-1)]
+            params = params + ("",)
+            self.cursor.execute(insert_sql, params)
+            self.conn.commit()
+
 
 
 # mysql连接池
@@ -44,14 +53,14 @@ class MysqlTwisterPipeline(object):
     @classmethod
     def from_settings(cls, settings):
         dbparams = dict(
-            host = settings["MYSQL_HOST"],
-            db = settings["MYSQL_DBNAME"],
-            user = settings["MYSQL_USER"],
-            passwd = settings["MYSQL_PASSWORD"],
-            charset = 'utf8',
-            cursorclass = pymysql.cursors.DictCursor,
+            host=settings["MYSQL_HOST"],
+            db=settings["MYSQL_DBNAME"],
+            user=settings["MYSQL_USER"],
+            password=settings["MYSQL_PASSWORD"],
+            charset='utf8',
+            cursorclass=pymysql.cursors.DictCursor,
+            use_unicode=True
         )
-        # dbpool = adbapi.ConnectionPool("pymysql", host = settings["MYSQL_HOST"], db = settings["MYSQL_DBNAME"],...)
         dbpool = adbapi.ConnectionPool("pymysql", **dbparams)
         return cls(dbpool)
 
@@ -66,11 +75,20 @@ class MysqlTwisterPipeline(object):
 
     def do_insert(self, cursor, item):
         insert_sql = """
-                    insert into jobbole_article(title, url, create_date, fav_nums)
-                    VALUES (%s, %s, %s, %s) ON DUPLICATE KEY UPDATE content=VALUES(fav_nums)
+                    insert into 
+                    jobbole_article(title, create_date, url, url_object_id, front_image_url,
+                    front_image_path, comment_nums, fav_nums, praise_nums, tags, content)  
+                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
-        params = (item["title"], item["url"], item["create_date"], item["fav_nums"])
-        cursor.execute(insert_sql, params)
+        params = (item["title"], item["create_date"], item["url"], item["url_object_id"], item["front_image_url"][0],
+                  item["front_image_path"], item["comment_nums"], item["fav_nums"], item["praise_nums"], item["tags"],
+                  item["content"])
+        try:
+            cursor.execute(insert_sql, params)
+        except Exception:
+            params = params[0:(len(params) - 1)]
+            params = params + ("",)
+            cursor.execute(insert_sql, params)
 
 
 # 自定义导出json文件
