@@ -64,5 +64,5 @@ class ArticleItem(scrapy.Item):
     tags = scrapy.Field(input_processor=MapCompose(remove_comment_tags),output_processor=Join(','))
     url = scrapy.Field()
     url_object_id = scrapy.Field()
-    front_image_url = scrapy.Field(input_processor=MapCompose(return_value),)
+    front_image_url = scrapy.Field(input_processor=MapCompose(return_value),output_processor=Join(','))
     front_image_path = scrapy.Field()

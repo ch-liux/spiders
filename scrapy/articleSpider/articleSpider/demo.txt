@@ -1,0 +1,15 @@
+create database python;
+use python;
+create table jobbole_article(
+title VARCHAR(200),
+create_date DATE,
+url VARCHAR(300),
+url_object_id VARCHAR(300) PRIMARY KEY not NULL,
+front_image_url VARCHAR(300),
+front_image_path VARCHAR(200),
+comment_nums int(10),
+fav_nums int(10),
+praise_nums int(10),
+tags VARCHAR(100),
+content LONGTEXT
+);

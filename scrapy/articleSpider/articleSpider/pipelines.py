@@ -11,7 +11,6 @@ import codecs, json, pymysql
 from twisted.enterprise import adbapi
 
 
-
 # 跟数据存储相关
 class ArticlespiderPipeline(object):
     def process_item(self, item, spider):
@@ -37,12 +36,11 @@ class MysqlPipeline(object):
             self.cursor.execute(insert_sql, params)
             self.conn.commit()
         except Exception:
-            # content可能保存失败ascii
-            params = params[0:(len(params)-1)]
+            plen = len(params)
+            params = params[:plen-1]
             params = params + ("",)
             self.cursor.execute(insert_sql, params)
             self.conn.commit()
-
 
 
 # mysql连接池
@@ -58,9 +56,10 @@ class MysqlTwisterPipeline(object):
             user=settings["MYSQL_USER"],
             password=settings["MYSQL_PASSWORD"],
             charset='utf8',
-            cursorclass=pymysql.cursors.DictCursor,
-            use_unicode=True
+            use_unicode=True,
+            cursorclass=pymysql.cursors.DictCursor
         )
+        # dbpool = adbapi.ConnectionPool("pymysql", host = settings["MYSQL_HOST"], db = settings["MYSQL_DBNAME"],...)
         dbpool = adbapi.ConnectionPool("pymysql", **dbparams)
         return cls(dbpool)
 
@@ -85,8 +84,9 @@ class MysqlTwisterPipeline(object):
                   item["content"])
         try:
             cursor.execute(insert_sql, params)
-        except Exception:
-            params = params[0:(len(params) - 1)]
+        except:
+            plen = len(params)
+            params = params[:plen - 1]
             params = params + ("",)
             cursor.execute(insert_sql, params)
 
@@ -129,5 +129,4 @@ class ArticleImagePipeline(ImagesPipeline):
             for ok, value in results:
                 image_file_path = value["path"]
             item["front_image_path"] = image_file_path
-
         return item
