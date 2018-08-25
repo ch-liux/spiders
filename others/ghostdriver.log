@@ -1,5 +1,18 @@
-[INFO  - 2018-08-24T10:40:56.617Z] GhostDriver - Main - running on port 64500
-[INFO  - 2018-08-24T10:40:58.730Z] Session [2ffd3950-a78a-11e8-b69b-4fc27adf6578] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
-[INFO  - 2018-08-24T10:40:58.730Z] Session [2ffd3950-a78a-11e8-b69b-4fc27adf6578] - page.customHeaders:  - {}
-[INFO  - 2018-08-24T10:40:58.730Z] Session [2ffd3950-a78a-11e8-b69b-4fc27adf6578] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-7-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
-[INFO  - 2018-08-24T10:40:58.730Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 2ffd3950-a78a-11e8-b69b-4fc27adf6578
+[INFO  - 2018-08-25T10:50:24.232Z] GhostDriver - Main - running on port 57698
+[INFO  - 2018-08-25T10:50:28.358Z] Session [adecd9e0-a854-11e8-b3f6-7336f9bc6581] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2018-08-25T10:50:28.358Z] Session [adecd9e0-a854-11e8-b3f6-7336f9bc6581] - page.customHeaders:  - {}
+[INFO  - 2018-08-25T10:50:28.358Z] Session [adecd9e0-a854-11e8-b3f6-7336f9bc6581] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-7-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2018-08-25T10:50:28.358Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: adecd9e0-a854-11e8-b3f6-7336f9bc6581
+[ERROR - 2018-08-25T10:51:29.193Z] Session [adecd9e0-a854-11e8-b3f6-7336f9bc6581] - page.onError - msg: TypeError: undefined is not an object (evaluating 'bgR7K.addCallback')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2018-08-25T10:51:29.194Z] Session [adecd9e0-a854-11e8-b3f6-7336f9bc6581] - page.onError - stack:
+  (anonymous function) (https://s3.music.126.net/web/s/core_e64cdca62cf972d173ec57687f8d2fa8.js?e64cdca62cf972d173ec57687f8d2fa8:133)
+  forEach (:0)
+  bf0x (https://s3.music.126.net/web/s/core_e64cdca62cf972d173ec57687f8d2fa8.js?e64cdca62cf972d173ec57687f8d2fa8:17)
+  (anonymous function) (https://s3.music.126.net/web/s/core_e64cdca62cf972d173ec57687f8d2fa8.js?e64cdca62cf972d173ec57687f8d2fa8:133)
+  (anonymous function) (https://s3.music.126.net/web/s/core_e64cdca62cf972d173ec57687f8d2fa8.js?e64cdca62cf972d173ec57687f8d2fa8:1)
+  RO0x (https://s3.music.126.net/web/s/core_e64cdca62cf972d173ec57687f8d2fa8.js?e64cdca62cf972d173ec57687f8d2fa8:25)
+  (anonymous function) (https://s3.music.126.net/web/s/core_e64cdca62cf972d173ec57687f8d2fa8.js?e64cdca62cf972d173ec57687f8d2fa8:1)
+
+  phantomjs://platform/console++.js:263 in error
