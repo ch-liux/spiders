@@ -1,0 +1,9 @@
+<!doctype html>
+<title>Hello Sample</title>
+{% if names %}
+  {% for name in names %}
+     <h1>Hello {{ name.name }}!</h1>
+  {% endfor %}
+{% else %}
+  <h1>Hello World!</h1>
+{% endif %}
