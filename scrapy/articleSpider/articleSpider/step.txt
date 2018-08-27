@@ -1,0 +1,6 @@
+# 爬取什么网站
+# 爬取什么内容
+
+scrapy shell url 可进行调试
+scrapy shell -s USER_AGENT="xxx" url
+浏览器插件jsonview

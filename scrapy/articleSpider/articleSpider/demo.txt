@@ -13,3 +13,32 @@ praise_nums int(10),
 tags VARCHAR(100),
 content LONGTEXT
 );
+---
+create table zhihu_question(
+zhihu_id bigint(20) PRIMARY KEY not NULL,
+topics varchar(255),
+url varchar(300),
+title varchar(200),
+content longtext,
+create_time datetime,
+update_time datetime,
+answer_num int(11),
+comments_num int(11),
+watch_user_num int(11),
+click_num int(11),
+crawl_time datetime,
+crawl_update_time datetime
+);
+create table zhihu_answer(
+zhihu_id bigint(20) PRIMARY KEY not NULL,
+url varchar(300),
+question_id bigint(20),
+author_id varchar(100),
+content longtext,
+praise_num int(11),
+commnets_num int(11),
+create_time datetime,
+update_time datetime,
+crawl_time datetime
+crawl_update_time datetime
+);

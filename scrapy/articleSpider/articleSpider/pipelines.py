@@ -73,22 +73,18 @@ class MysqlTwisterPipeline(object):
         print(failure)
 
     def do_insert(self, cursor, item):
-        insert_sql = """
-                    insert into 
-                    jobbole_article(title, create_date, url, url_object_id, front_image_url,
-                    front_image_path, comment_nums, fav_nums, praise_nums, tags, content)  
-                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                """
-        params = (item["title"], item["create_date"], item["url"], item["url_object_id"], item["front_image_url"][0],
-                  item["front_image_path"], item["comment_nums"], item["fav_nums"], item["praise_nums"], item["tags"],
-                  item["content"])
+        # 执行具体的插入
+        # 根据不同的item 构建不同的sql语句并插入到mysql中
+        # if item.__class__.__name__ == "ArticleItem":
+        insert_sql, params = item.get_sql()
         try:
             cursor.execute(insert_sql, params)
         except:
-            plen = len(params)
-            params = params[:plen - 1]
-            params = params + ("",)
-            cursor.execute(insert_sql, params)
+            if item.__class__.__name__ == "ArticleItem":
+                plen = len(params)
+                params = params[:plen - 1]
+                params = params + ("",)
+                cursor.execute(insert_sql, params)
 
 
 # 自定义导出json文件
