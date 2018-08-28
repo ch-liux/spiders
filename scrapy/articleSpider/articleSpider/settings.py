@@ -11,6 +11,7 @@
 
 import os
 
+
 BOT_NAME = 'articleSpider'
 
 SPIDER_MODULES = ['articleSpider.spiders']
@@ -79,6 +80,10 @@ ITEM_PIPELINES = {
 IMAGES_URLS_FIELD = "front_image_url"
 project_dir = os.path.abspath(os.path.dirname(__file__))
 IMAGES_STORE = os.path.join(project_dir, 'images')
+
+import sys
+BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, 'articleSpider'))
 # 保存的最小尺寸
 # IMAGES_MIN_HEIGHT = 100
 # IMAGES_MIN_WIDTH = 100

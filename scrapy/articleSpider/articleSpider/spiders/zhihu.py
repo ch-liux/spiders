@@ -5,7 +5,7 @@ import re
 import json
 from urllib import parse
 from scrapy.loader import ItemLoader
-from items import ZhihuQuestionItem,ZhihuAnswerItem
+from articleSpider.items import ZhihuQuestionItem,ZhihuAnswerItem
 import datetime
 
 

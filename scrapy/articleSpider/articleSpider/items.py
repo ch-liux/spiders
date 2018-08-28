@@ -150,3 +150,28 @@ class ZhihuAnswerItem(scrapy.Item):
                   self["content"], self["praise_num"], self["commnets_num"], create_time,
                   update_time, self["crawl_time"].strftime("%Y-%m-%d %H:%M:%S"), self["crawl_update_time"].strftime("%Y-%m-%d %H:%M:%S"))
         return insert_sql, params
+
+
+class LagouJobItem(scrapy.Item):
+    url = scrapy.Field()
+    url_object_id = scrapy.Field()
+    title = scrapy.Field()
+    salary = scrapy.Field()
+    job_city = scrapy.Field()
+    work_years = scrapy.Field()
+    degree_need = scrapy.Field()
+    job_type = scrapy.Field()
+    pulish_time = scrapy.Field()
+    tags = scrapy.Field()
+    job_advantage = scrapy.Field()
+    job_desc = scrapy.Field()
+    job_addr = scrapy.Field()
+    company_url = scrapy.Field()
+    company_name = scrapy.Field()
+    crawl_time = scrapy.Field()
+    crawl_update_time = scrapy.Field()
+
+
+class LagouJobItemLoader(ItemLoader):
+    # 自定义itemLoader
+    default_output_processor = TakeFirst()

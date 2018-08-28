@@ -1,5 +1,6 @@
 create database python;
 use python;
+---jobbole
 create table jobbole_article(
 title VARCHAR(200),
 create_date DATE,
@@ -13,7 +14,7 @@ praise_nums int(10),
 tags VARCHAR(100),
 content LONGTEXT
 );
----
+---zhihu
 create table zhihu_question(
 zhihu_id bigint(20) PRIMARY KEY not NULL,
 topics varchar(255),
@@ -42,3 +43,23 @@ update_time datetime,
 crawl_time datetime
 crawl_update_time datetime
 );
+----lagou
+create table lagou_job(
+url varchar(300),
+url_object_id varchar(50),
+title varchar(100),
+salary varchar(20),
+job_city varchar(10),
+work_years varchar(100),
+degree_need varchar(30),
+job_type varchar(20),
+pulish_time varchar(20),
+tags varchar(100),
+job_advantage varchar(1000),
+job_desc longtext,
+job_addr varchar(50),
+company_url varchar(300),
+company_name varchar(100),
+crawl_time datetime,
+crawl_update_time datetime
+)
