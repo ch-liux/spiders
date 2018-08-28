@@ -4,3 +4,5 @@
 scrapy shell url 可进行调试
 scrapy shell -s USER_AGENT="xxx" url
 浏览器插件jsonview
+
+辅助:cmdr/fiddler
