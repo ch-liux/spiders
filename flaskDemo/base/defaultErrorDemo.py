@@ -25,7 +25,7 @@ def invalid_usage(error):
 def login():
     app.logger.debug('error debug')
     app.logger.error('error error')
-
+    #”server.log”记录所有级别日志；”error.log”只记录错误日志
     server_log = TimedRotatingFileHandler('server.log', 'D')
     server_log.setLevel(logging.DEBUG)
     server_log.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s'))
