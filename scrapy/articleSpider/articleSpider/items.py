@@ -9,6 +9,7 @@ import scrapy, datetime, re
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import MapCompose, TakeFirst, Join
 from articleSpider.utils.common import extract_num
+from w3lib.html import remove_tags
 
 
 
@@ -152,20 +153,38 @@ class ZhihuAnswerItem(scrapy.Item):
         return insert_sql, params
 
 
+def remove_splash(value):
+    return value.replace("/", "")
+
+
+def handle_jobaddr(value):
+    addr_list = value.split("\n")
+    addr_list = [item.strip() for item in addr_list if item.strip() != '查看地图']
+    return "".join(addr_list)
+
+
 class LagouJobItem(scrapy.Item):
     url = scrapy.Field()
     url_object_id = scrapy.Field()
     title = scrapy.Field()
     salary = scrapy.Field()
-    job_city = scrapy.Field()
-    work_years = scrapy.Field()
-    degree_need = scrapy.Field()
+    job_city = scrapy.Field(
+        input_processor=MapCompose(remove_splash),
+    )
+    work_years = scrapy.Field(
+        input_processor=MapCompose(remove_splash),
+    )
+    degree_need = scrapy.Field(
+        input_processor=MapCompose(remove_splash),
+    )
     job_type = scrapy.Field()
     pulish_time = scrapy.Field()
     tags = scrapy.Field()
     job_advantage = scrapy.Field()
     job_desc = scrapy.Field()
-    job_addr = scrapy.Field()
+    job_addr = scrapy.Field(
+        input_processor=MapCompose(remove_tags, handle_jobaddr),
+    )
     company_url = scrapy.Field()
     company_name = scrapy.Field()
     crawl_time = scrapy.Field()
