@@ -179,7 +179,9 @@ class LagouJobItem(scrapy.Item):
     )
     job_type = scrapy.Field()
     pulish_time = scrapy.Field()
-    tags = scrapy.Field()
+    tags = scrapy.Field(
+        input_processor = Join(",")
+    )
     job_advantage = scrapy.Field()
     job_desc = scrapy.Field()
     job_addr = scrapy.Field(
@@ -189,6 +191,23 @@ class LagouJobItem(scrapy.Item):
     company_name = scrapy.Field()
     crawl_time = scrapy.Field()
     crawl_update_time = scrapy.Field()
+
+    def get_insert_sql(self):
+        insert_sql = """
+            insert into lagou_job(title, url, salary, job_city, work_years, degree_need,
+            job_type, publish_time, job_advantage, job_desc, job_addr, company_name, company_url,
+            tags, crawl_time, url_object_id) 
+            VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) 
+            ON DUPLICATE KEY UPDATE salary=VALUES(salary), job_desc=VALUES(job_desc)
+        """
+        params = (
+            self["title"],self["url"],self["salary"],self["job_city"],self["work_years"],
+            self["degree_need"],self["job_type"],self["publish_time"],self["job_advantage"],
+            self["job_desc"],self["job_addr"],self["company_name"],
+            self["company_url"],self["tags"],self["crawl_time"].strftime("%Y-%m-%d %H:%M:%S"),
+            self["url_object_id"]
+        )
+        return insert_sql, params
 
 
 class LagouJobItemLoader(ItemLoader):
