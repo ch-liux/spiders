@@ -21,6 +21,9 @@ class ZhihuSpider(scrapy.Spider):
         "Referrer": "https://www.zhihu.com",
         "User-Agent": agent
     }
+    custom_settings = {
+        "COOKIES_ENABLED": True
+    }
 
     def parse(self, response):
         all_urls = response.css("a::attr(href)").extract()

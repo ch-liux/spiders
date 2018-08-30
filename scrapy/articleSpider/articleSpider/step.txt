@@ -5,4 +5,11 @@ scrapy shell url 可进行调试
 scrapy shell -s USER_AGENT="xxx" url
 浏览器插件jsonview
 
-辅助:cmder/fiddler
+cmder
+fiddler
+:scrapy-proxy
+:scrapy-crawlera
+tor:vpn
+
+验证码识别:tesseract-ocr, 在线打码, 人工打码
+云打码
