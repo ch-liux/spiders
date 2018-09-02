@@ -7,6 +7,9 @@ from urllib import parse
 from articleSpider.items import ArticleItem, ArticleItemLoader
 from articleSpider.utils.common import get_md5
 from scrapy.loader import ItemLoader
+from selenium import webdriver
+from scrapy.xlib.pydispatch import dispatcher
+from scrapy import signals
 
 
 class JobboleSpider(scrapy.Spider):
@@ -14,7 +17,26 @@ class JobboleSpider(scrapy.Spider):
     allowed_domains = ['blog.jobbole.com']
     start_urls = ['http://blog.jobbole.com/all-posts/']
 
+    # def __init__(self):
+    #     self.browser = webdriver.Chrome()
+    #     super(JobboleSpider, self).__init__()
+    #     # 发送信号
+    #     dispatcher.connect(self.spider_closed, signals.spider_closed)
+    #
+    # def spider_closed(self, spider):
+    #     print("spiderd closed")
+    #     self.browser.quit()
+
+    # 收集伯乐在线所有404的url以及404页面
+    # handle_httpstatus_list = [404]
+    # def __init__(self):
+    #     self.fail_urls = []
+
     def parse(self, response):
+        # if response.status == 404:
+        #     self.fail_urls.append(response.url)
+        #     self.crawler.stats.inc_value("fail_url")
+
         post_nodes = response.css("#archive .floated-thumb .post-thumb a")
         if post_nodes:
             for post_node in post_nodes:
