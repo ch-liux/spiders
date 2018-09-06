@@ -126,3 +126,11 @@ class ArticleImagePipeline(ImagesPipeline):
                 image_file_path = value["path"]
             item["front_image_path"] = image_file_path
         return item
+
+
+# 数据写入到ec中
+# elasticsearch-dsl-py : pip install elasticsearch-dsl
+class ElasticsearchPipeline(object):
+    def process_item(self, item, spider):
+        self.expoter.expote_item(item)
+        return item
