@@ -44,12 +44,12 @@ class JobboleSpider(scrapy.Spider):
                 post_url = post_node.css("::attr(href)").extract_first("")
                 yield Request(url=parse.urljoin(response.url, post_url), meta={"front_image_url":image_url}, callback=self.parse_detail)
 
-        # next_url = response.css(".next.page-numbers::attr(href)").extract_first("")
-        # if next_url:
-        #     yield Request(url=parse.urljoin(response.url, next_url), callback=self.parse)
+        next_url = response.css(".next.page-numbers::attr(href)").extract_first("")
+        if next_url:
+            yield Request(url=parse.urljoin(response.url, next_url), callback=self.parse)
 
     def parse_detail(self, response):
-        article_item = ArticleItem()
+        # article_item = ArticleItem()
         #title=标题, create_date=创建时间, praise_nums=点赞数
         #fav_nums=收藏数, comment_nums=评论数, tags=标签
         #front_image_url=封面图
@@ -110,8 +110,8 @@ class JobboleSpider(scrapy.Spider):
         item_loader.add_css("tags", "p.entry-meta-hide-on-mobile a::text")
         item_loader.add_css("content", "div.entry")
 
-        temp = article_item
-        print(temp)
+        # temp = article_item
+        # print(temp)
         article_item = item_loader.load_item()
-
+        article_item["front_image_url"] = [article_item["front_image_url"]]
         yield article_item

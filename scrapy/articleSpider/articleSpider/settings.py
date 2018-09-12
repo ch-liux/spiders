@@ -76,15 +76,16 @@ ITEM_PIPELINES = {
    # 'scrapy.pipelines.images.ImagesPipeline': 1,
    'articleSpider.pipelines.ArticleImagePipeline': 100,
    # 'articleSpider.pipelines.MysqlPipeline': 200,
-   'articleSpider.pipelines.MysqlTwisterPipeline': 200,
+   # 'articleSpider.pipelines.MysqlTwisterPipeline': 200,
+   'articleSpider.pipelines.ElasticsearchPipeline': 200,
 }
 IMAGES_URLS_FIELD = "front_image_url"
 project_dir = os.path.abspath(os.path.dirname(__file__))
 IMAGES_STORE = os.path.join(project_dir, 'images')
 
-import sys
-BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
-sys.path.insert(0, os.path.join(BASE_DIR, 'articleSpider'))
+# import sys
+# BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+# sys.path.insert(0, os.path.join(BASE_DIR, 'articleSpider'))
 # 保存的最小尺寸
 # IMAGES_MIN_HEIGHT = 100
 # IMAGES_MIN_WIDTH = 100

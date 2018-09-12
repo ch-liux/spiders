@@ -132,5 +132,5 @@ class ArticleImagePipeline(ImagesPipeline):
 # elasticsearch-dsl-py : pip install elasticsearch-dsl
 class ElasticsearchPipeline(object):
     def process_item(self, item, spider):
-        self.expoter.expote_item(item)
+        item.save_to_es()
         return item
